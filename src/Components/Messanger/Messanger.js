@@ -1,21 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react'
-import db from './Firebase'
+import db from '../Firebase'
 import Message from './Message'
 import firebase from 'firebase'
 import './messanger.css'
 
-export default function Messanger() {
+export default function Messanger({ user }) {
     const [input, setInput] = useState('')
     const [messages, setMessages] = useState([])
     const [username, setUsername] = useState('')
     const messagesEndRef = useRef(null)
 
     const scrollToBottom = () => {
-        messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
+        messagesEndRef.current.scrollIntoView({ behavior: 'smooth', inline: 'end' })
     }
     useEffect(scrollToBottom, [messages])
 
     useEffect(() => {
+        setUsername(user)
         //Get data(messages) from firebase
         db.collection('messages')
             .orderBy('timestamp', 'asc')
@@ -24,9 +25,9 @@ export default function Messanger() {
             })
     }, [])
 
-    useEffect(() => {
-        setUsername(prompt('Enter username'))
-    }, [])
+    // useEffect(() => {
+    //     setUsername(prompt('Enter username'))
+    // }, [])
 
 
     const sendMessage = (e) => {
@@ -44,20 +45,22 @@ export default function Messanger() {
 
     return (
         <div className="chatbox">
-            <h1>Chat {username}</h1>
-            {messages.map((message, index) => {
-                return (
-                    <Message
-                        key={index}
-                        username={username}
-                        message={message}
-                    />
-                )
-            })}
-            <div ref={messagesEndRef} />
+            <div className="chatbox__chat">
+                <h1>Chat {username}</h1>
+                {messages.map((message, index) => {
+                    return (
+                        <Message
+                            key={index}
+                            username={username}
+                            message={message}
+                        />
+                    )
+                })}
+                <div ref={messagesEndRef} />
+            </div>
             <form className="chatbox__form">
                 <input className="chatbox__input-text" value={input} type="text" onChange={(e) => setInput(e.target.value)}></input>
-                <input className="chatbox__input-btn" type='submit' disabled={!input} value='Send' onClick={sendMessage}></input>
+                <input className="chatbox__input-btn" type="submit" disabled={!input} value="Send" onClick={sendMessage}></input>
             </form>
         </div>
     )

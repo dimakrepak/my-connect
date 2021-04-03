@@ -1,10 +1,11 @@
 import './App.css';
-import Messanger from './Components/Messanger';
+import Main from './Components/Main';
+
 
 function App() {
   return (
     <div className="App">
-      <Messanger />
+      <Main />
     </div>
   );
 }
