@@ -4,7 +4,7 @@ import Message from './Message'
 import firebase from 'firebase'
 import './messanger.css'
 
-export default function Messanger({user}) {
+export default function Messanger({ user }) {
     const [input, setInput] = useState('')
     const [messages, setMessages] = useState([])
     const [username, setUsername] = useState('')
@@ -47,8 +47,8 @@ export default function Messanger({user}) {
 
     return (
         <div className="chatbox">
+            <h1 className="chatbox__title">FORUM 🌐</h1>
             <div className="chatbox__chat">
-                <h1>Chat {username}</h1>
                 {messages.map((message, index) => {
                     return (
                         <Message
@@ -62,7 +62,7 @@ export default function Messanger({user}) {
             </div>
             <form className="chatbox__form">
                 <input className="chatbox__input-text" value={input} type="text" onChange={(e) => setInput(e.target.value)}></input>
-                <input className="chatbox__input-btn" type="submit" disabled={!input} value="Send" onClick={sendMessage}></input>
+                <button className="chatbox__input-btn" type="submit" disabled={!input} value="Send" onClick={sendMessage}>Send</button>
             </form>
         </div>
     )

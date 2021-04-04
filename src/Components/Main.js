@@ -1,17 +1,22 @@
 // import React, { useState, useEffect } from 'react'
 import Login from './Login'
 import Messanger from './Messanger/Messanger'
+import Newspage from './Newspage/Newspage';
 import { useStateValue } from './StateProvider';
+import './main.css'
 
 export default function Main() {
     const [{ user }] = useStateValue()
     return (
-        <div>
+        <>
             {!user ?
                 <Login />
                 :
-                <Messanger user={user.displayName} />
+                <div className="main-page">
+                    <Newspage />
+                    <Messanger user={user.displayName} />
+                </div >
             }
-        </div>
+        </>
     )
 }

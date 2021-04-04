@@ -1,0 +1,29 @@
+.newspage {
+  width: 100vw;
+}
+.newspage__navbar {
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  background-color: rgb(190, 204, 216);
+}
+.newspage__input {
+  width: 40%;
+  border:none;
+  outline: none;
+  font-size:25px;
+  text-align: center;
+}
+.newscard {
+  width: 20vw;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin: 15px;
+  padding: 5px;
+}
+.newspage__grid {
+  width: 70vw;
+  display: flex;
+  flex-wrap: wrap;
+}
