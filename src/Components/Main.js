@@ -4,15 +4,13 @@ import Messanger from './Messanger/Messanger'
 import { useStateValue } from './StateProvider';
 
 export default function Main() {
-    const [{ user }, dispatch] = useStateValue()
+    const [{ user }] = useStateValue()
     return (
         <div>
             {!user ?
                 <Login />
                 :
-                <Messanger
-                //  user={username} 
-                />
+                <Messanger user={user.displayName} />
             }
         </div>
     )
