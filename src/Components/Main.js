@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react'
+// import React, { useState, useEffect } from 'react'
 import Login from './Login'
 import Messanger from './Messanger/Messanger'
+import { useStateValue } from './StateProvider';
 
-export default function Main({user}) {
-    const [username, setUsername] = useState(null)
+export default function Main() {
+    const [{ user }, dispatch] = useStateValue()
     return (
         <div>
-            {!username ?
+            {!user ?
                 <Login />
                 :
-                <Messanger user={username} />
+                <Messanger
+                //  user={username} 
+                />
             }
         </div>
     )

@@ -3,11 +3,13 @@ import db from '../Firebase'
 import Message from './Message'
 import firebase from 'firebase'
 import './messanger.css'
+import { useStateValue } from '../StateProvider'
 
-export default function Messanger({ user }) {
+export default function Messanger() {
     const [input, setInput] = useState('')
     const [messages, setMessages] = useState([])
     const [username, setUsername] = useState('')
+    const [{user}, dispatch] = useStateValue();
     const messagesEndRef = useRef(null)
 
     const scrollToBottom = () => {
@@ -16,7 +18,7 @@ export default function Messanger({ user }) {
     useEffect(scrollToBottom, [messages])
 
     useEffect(() => {
-        setUsername(user)
+        setUsername(user?.displayName)
         //Get data(messages) from firebase
         db.collection('messages')
             .orderBy('timestamp', 'asc')
