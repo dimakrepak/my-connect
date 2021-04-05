@@ -6,14 +6,18 @@ import NewsCard from './NewsCard'
 export default function Newspage() {
     const [data, setData] = useState([])
     useEffect(() => {
+
         const getTopHeaders = async () => {
-            const response = await axios.get('https://newsapi.org/v2/top-headlines', {
-                params: {
-                    country: 'us',
-                    apiKey: '5c724d1552f446aba1a0535718b868b2'
-                }
-            })
-            console.log(response.data.articles);
+            let response;
+            try {
+                response = await axios.get('https://newsapi.org/v2/top-headlines', {
+                    params: {
+                        country: 'us',
+                        apiKey: '5c724d1552f446aba1a0535718b868b2'
+                    }
+                })
+                console.log(response.data.articles);
+            } catch (err) { }
             setData(response.data.articles)
         }
         getTopHeaders()
@@ -31,11 +35,12 @@ export default function Newspage() {
                 </div>
             </div>
             <div className="newspage__grid">
-                {data.map(d => {
+                {data.map((d, index) => {
                     return (
                         <NewsCard
+                            key={index}
                             title={d.title}
-                            imgUrl={d.urlToImage}
+                            // imgUrl={d.urlToImage}
                             description={d.description}
                             sourceUrl={d.url}
                         />
