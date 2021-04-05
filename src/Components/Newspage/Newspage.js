@@ -8,17 +8,18 @@ export default function Newspage() {
     useEffect(() => {
 
         const getTopHeaders = async () => {
-            let response;
             try {
-                response = await axios.get('https://newsapi.org/v2/top-headlines', {
+                const response = await axios.get('https://newsapi.org/v2/top-headlines', {
                     params: {
                         country: 'us',
                         apiKey: '5c724d1552f446aba1a0535718b868b2'
                     }
                 })
+                setData(response.data.articles)
                 console.log(response.data.articles);
-            } catch (err) { }
-            setData(response.data.articles)
+            } catch (error) {
+                console.log(error.response);
+            }
         }
         getTopHeaders()
     }, [])
@@ -40,7 +41,7 @@ export default function Newspage() {
                         <NewsCard
                             key={index}
                             title={d.title}
-                            // imgUrl={d.urlToImage}
+                            imgUrl={d.urlToImage}
                             description={d.description}
                             sourceUrl={d.url}
                         />
