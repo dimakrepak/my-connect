@@ -3,16 +3,37 @@ import axios from 'axios'
 import './newspage.css'
 import NewsCard from './NewsCard'
 
+const apiKey = 'b168264335a62a015d4859525bc40f07'
+
 export default function Newspage() {
     const [data, setData] = useState([])
+
     useEffect(() => {
 
+        const fetchNews = async () => {
+        
+            const api_key = "00996750f97644cca91df97021253add";
+            const api_endpoint = `https://newsapi.org/v2/top-headlines?country=us&sortBy=publishedAt&language=en&apiKey=${api_key}`;
+
+            await axios.get(api_endpoint).then(function (response) {
+                const data = response.data;
+                const news = data.articles.slice(0, 30);
+
+                console.log(data);
+            }).catch(function (err) {
+                console.log(err);
+            })
+        }
+        fetchNews()
         const getTopHeaders = async () => {
             try {
-                const response = await axios.get('https://newsapi.org/v2/top-headlines', {
+                const response = await axios.get(`https://gnews.io/api/v4/top-headlines`, {
                     params: {
-                        country: 'us',
-                        apiKey: '5c724d1552f446aba1a0535718b868b2'
+                        q: 'russia',
+                        topic: 'breaking-news',
+                        token: apiKey,
+                        country: 'Any',
+                        max: '10'
                     }
                 })
                 setData(response.data.articles)
@@ -35,13 +56,14 @@ export default function Newspage() {
                     </select>
                 </div>
             </div>
+            <h1>TOP World News</h1>
             <div className="newspage__grid">
                 {data.map((d, index) => {
                     return (
                         <NewsCard
                             key={index}
                             title={d.title}
-                            imgUrl={d.urlToImage}
+                            imgUrl={d.image}
                             description={d.description}
                             sourceUrl={d.url}
                         />
