@@ -3,8 +3,10 @@ import axios from 'axios'
 import './newspage.css'
 import NewsFeed from './NewsFeed'
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
-const apiKey = '49553fc2f2ffc628c209dd0bd60d8925'
+// const apiKey = '49553fc2f2ffc628c209dd0bd60d8925'
+const apiKey = 'ededefb48130670aca57b9c4d44a16d3'
 const topics = ['breaking-news', 'world', 'nation', 'business', 'technology', 'entertainment', 'sports', 'science', 'health']
 const countries = ['au', 'br', 'ca', 'ch', 'cn', 'de', 'eg', 'es', 'fr', 'gb', 'gr', 'hk', 'ie', 'il',
     'in', 'it', 'jp', 'nl', 'no', 'pe', 'ph', 'pk', 'pt', 'ro', 'ru', 'se', 'sg', 'tw', 'ua', 'us']
@@ -15,7 +17,8 @@ export default function Newspage() {
     const [country, setCountry] = useState([])
     const [countryOption, setCountryOption] = useState('Any')
     const [searchValue, setSearchValue] = useState('')
-    // const [topicClick, setTopicClick] = useState(false)
+    const [load, setLoad] = useState(false)
+
 
     const getCountries = async () => {
         const contriesData = []
@@ -27,6 +30,7 @@ export default function Newspage() {
     }
     const getTopHeaders = async () => {
         try {
+            setLoad(true);
             const response = await axios.get(`https://gnews.io/api/v4/top-headlines`, {
                 params: {
                     q: searchValue,
@@ -35,6 +39,7 @@ export default function Newspage() {
                     country: countryOption,
                 }
             })
+            setLoad(false);
             setData(response.data.articles)
             console.log(response.data.articles);
         } catch (error) {
@@ -44,6 +49,7 @@ export default function Newspage() {
     //Search api
     const searchQuery = async () => {
         try {
+            setLoad(true);
             const response = await axios.get(`https://gnews.io/api/v4/search`, {
                 params: {
                     q: searchValue,
@@ -51,6 +57,7 @@ export default function Newspage() {
                 }
             })
             setData(response.data.articles)
+            setLoad(false);
             console.log(response.data.articles);
         } catch (error) {
             console.log(error.response);
@@ -95,6 +102,7 @@ export default function Newspage() {
                     </select>
                 </div>
             </div>
+
             <nav className="newspage__topics-container">
                 {topics.map((t, index) => {
                     return (
@@ -102,7 +110,12 @@ export default function Newspage() {
                     )
                 })}
             </nav>
-            <NewsFeed data={data} />
+            {load ?
+                <LinearProgress />
+                :
+                <NewsFeed data={data} />
+
+            }
         </div>
     )
 }
