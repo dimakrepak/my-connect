@@ -2,5 +2,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height:100vh;
+  height: 100vh;
+}
+.login__container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  flex-flow: column;
+  height: 50vh;
+  width: 30vw;
+}
+.login__btn {
+  width: 150px;
+  height: 80px;
+}
+@media (max-width: 550px){
+  .login__container {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    flex-flow: column;
+    height: 80vh;
+    width: 80vw;
+  }
 }

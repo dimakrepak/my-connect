@@ -3,11 +3,12 @@ import './login.css'
 import { auth, provider } from './Firebase'
 import { useStateValue } from './StateProvider';
 import { actionTypes } from './Reducer';
+import GoogleButton from 'react-google-button'
 
 
 export default function Login() {
     const [{ }, dispatch] = useStateValue();
-    
+
     const signIn = () => {
         auth.signInWithPopup(provider).then(result => {
             console.log(result.user)
@@ -20,9 +21,11 @@ export default function Login() {
     return (
         <div className="login">
             <div className="login__container">
-                <h1>Welcome to myConnect</h1>
-                <h3>Sing in with GOOGLE</h3>
-                <button onClick={signIn}>Click to Connect</button>
+                <h1>Welcome to News Connect📰</h1>
+                <GoogleButton
+                    onClick={signIn}
+                />
+                <p>by Dima Krepak</p>
             </div>
         </div>
     )

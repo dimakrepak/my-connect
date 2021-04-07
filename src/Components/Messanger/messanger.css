@@ -3,56 +3,116 @@
   border: none;
   position: fixed;
   right: 0;
+  height: 80vh;
   bottom: 10px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  margin: 4px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
+    rgba(163, 159, 159, 0.23) 0px 3px 6px;
+  margin: 10px;
   border-radius: 5px;
 }
 .chatbox__chat {
+  background-color: rgba(0, 0, 0, 0.932);
   overflow-y: auto;
   overflow-x: none;
-  height: 70vh;
+  height: 86%;
   display: flex;
   flex-flow: column;
 }
 .chatbox__title {
   color: rgb(0, 0, 0);
-  text-align: center;
-  height: 50px;
-  background-color: rgb(227, 242, 255);
+  height: 7%;
+  background-color: rgb(109, 184, 255);
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-/* .chatbox__form {
-  height:10vh
-} */
+.chatbox__title-h1 {
+  font-size: 25px;
+  margin-left: 10%;
+}
+.chatbox__form {
+  background-color: #fff;
+  height: 7%;
+  display: flex;
+  align-items: center;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
 .chatbox__input-text {
   padding-left: 2px;
   width: 80%;
   outline: none;
   border: none;
   font-size: 20px;
-  height:20px
+  height: 20px;
 }
 .chatbox__input-btn {
   width: 20%;
+  height: 80%;
+  background-color: rgb(50, 156, 255);
   border: none;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  font-size: 20px;
-  padding:5px
+  border-radius: 10px;
+  font-size: 17px;
+  margin-right: 5px;
 }
 .message {
   width: 50%;
   max-width: 50%;
   background-color: rgb(227, 242, 255);
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  /* box-shadow: rgba(99, 98, 98, 0.377) 1.95px 1.95px 2.6px; */
   border-radius: 5px;
   margin: 10px;
-  padding: 3px;
+  padding: 5px;
   word-break: break-all;
 }
 .message__user {
   margin-left: auto;
   background-color: rgb(50, 156, 255);
   color: rgb(255, 255, 255);
+}
+.forumBtn {
+  text-align: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: fixed;
+  right: 0;
+  bottom: 10px;
+  border: none;
+  background-color: rgb(50, 156, 255);
+  font-size: 25px;
+  margin: 10px;
+  cursor: pointer;
+  outline: none;
+}
+.chatbox__close-btn {
+  border: none;
+  margin-right: 10px;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+}
+/* MEDIA */
+@media (max-width: 550px) {
+  .chatbox {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    bottom: 0;
+    border-radius: 0px;
+    z-index: 10;
+  }
+  .message {
+    width: 70%;
+    max-width: 70%;
+    background-color: rgb(227, 242, 255);
+    font-size:20px;
+  }
+  .message__user {
+    margin-left: auto;
+    background-color: rgb(50, 156, 255);
+    color: rgb(255, 255, 255);
+  }
 }

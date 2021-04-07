@@ -1,75 +1,108 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './newspage.css'
-import NewsCard from './NewsCard'
+import NewsFeed from './NewsFeed'
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 
-const apiKey = 'b168264335a62a015d4859525bc40f07'
+const apiKey = '49553fc2f2ffc628c209dd0bd60d8925'
+const topics = ['breaking-news', 'world', 'nation', 'business', 'technology', 'entertainment', 'sports', 'science', 'health']
+const countries = ['au', 'br', 'ca', 'ch', 'cn', 'de', 'eg', 'es', 'fr', 'gb', 'gr', 'hk', 'ie', 'il',
+    'in', 'it', 'jp', 'nl', 'no', 'pe', 'ph', 'pk', 'pt', 'ro', 'ru', 'se', 'sg', 'tw', 'ua', 'us']
 
 export default function Newspage() {
     const [data, setData] = useState([])
+    const [topic, setTopic] = useState('breaking-news')
+    const [country, setCountry] = useState([])
+    const [countryOption, setCountryOption] = useState('Any')
+    const [searchValue, setSearchValue] = useState('')
+    // const [topicClick, setTopicClick] = useState(false)
+
+    const getCountries = async () => {
+        const contriesData = []
+        countries.map(async c => {
+            let response = await axios.get(`https://restcountries.eu/rest/v2/alpha?codes=${c}`)
+            contriesData.push(response.data[0])
+        })
+        setCountry(contriesData)
+    }
+    const getTopHeaders = async () => {
+        try {
+            const response = await axios.get(`https://gnews.io/api/v4/top-headlines`, {
+                params: {
+                    q: searchValue,
+                    topic: topic,
+                    token: apiKey,
+                    country: countryOption,
+                }
+            })
+            setData(response.data.articles)
+            console.log(response.data.articles);
+        } catch (error) {
+            console.log(error.response);
+        }
+    }
+    //Search api
+    const searchQuery = async () => {
+        try {
+            const response = await axios.get(`https://gnews.io/api/v4/search`, {
+                params: {
+                    q: searchValue,
+                    token: apiKey,
+                }
+            })
+            setData(response.data.articles)
+            console.log(response.data.articles);
+        } catch (error) {
+            console.log(error.response);
+        }
+    }
+    useEffect(() => {
+        getCountries()
+    }, [])
 
     useEffect(() => {
-
-        const fetchNews = async () => {
-        
-            const api_key = "00996750f97644cca91df97021253add";
-            const api_endpoint = `https://newsapi.org/v2/top-headlines?country=us&sortBy=publishedAt&language=en&apiKey=${api_key}`;
-
-            await axios.get(api_endpoint).then(function (response) {
-                const data = response.data;
-                const news = data.articles.slice(0, 30);
-
-                console.log(data);
-            }).catch(function (err) {
-                console.log(err);
-            })
-        }
-        fetchNews()
-        const getTopHeaders = async () => {
-            try {
-                const response = await axios.get(`https://gnews.io/api/v4/top-headlines`, {
-                    params: {
-                        q: 'russia',
-                        topic: 'breaking-news',
-                        token: apiKey,
-                        country: 'Any',
-                        max: '10'
-                    }
-                })
-                setData(response.data.articles)
-                console.log(response.data.articles);
-            } catch (error) {
-                console.log(error.response);
-            }
-        }
+        setSearchValue('')
         getTopHeaders()
-    }, [])
+    }, [topic, countryOption])
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        setSearchValue('')
+        searchQuery()
+    }
+
     return (
         <div className="newspage">
             <div className="newspage__navbar">
                 <h1>News Connect📰</h1>
-                <input className="newspage__input" type="text" placeholder="🔍"></input>
+                <form className="newspage__searchbox">
+                    <input className="newspage__input" type="text" value={searchValue} placeholder="Search" onChange={(e) => { setSearchValue(e.target.value) }}>
+                    </input>
+
+                    <button className="newspage__search-btn" type="submit" onClick={handleSearch}><SearchOutlinedIcon />
+                    </button>
+                </form>
                 <div>
                     <label className="newspage__label">Select your country</label>
-                    <select className="newspage__dropdown" name="country">
-                        <option value="US">USA</option>
+                    <select className="newspage__dropdown" name="country" onChange={(e) => setCountryOption(e.target.value)}>
+                        <option value="Any">All</option>
+                        {country.map((c, index) => {
+                            return (
+                                <option key={index} value={c.alpha2Code.toLowerCase()}>{c.name.length > 20 ? c.nativeName : c.name}
+                                </option>
+                            )
+                        })}
                     </select>
                 </div>
             </div>
-            <h1>TOP World News</h1>
-            <div className="newspage__grid">
-                {data.map((d, index) => {
+            <nav className="newspage__topics-container">
+                {topics.map((t, index) => {
                     return (
-                        <NewsCard
-                            key={index}
-                            title={d.title}
-                            imgUrl={d.image}
-                            description={d.description}
-                            sourceUrl={d.url}
-                        />
+                        <button className={`newspage__topics ${topic === t && 'newspage__topics-clicked'}`} key={index} onClick={() => setTopic(t)} >{t.charAt(0).toUpperCase() + t.slice(1)}</button>
                     )
                 })}
-            </div>
+            </nav>
+            <NewsFeed data={data} />
         </div>
     )
 }
