@@ -56,6 +56,20 @@
 .newscard:hover {
   background-color: rgb(235, 235, 235);
 }
+.newspage__dropdown {
+  position: relative;
+  min-width: 30%;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  margin-left: 10px;
+  border-radius: 5px;
+  padding:2px;
+}
+/* .newspage__dropdown option {
+  cursor:pointer;
+} */
 .newspage__grid {
   /* width: ; */
   display: flex;
@@ -137,7 +151,7 @@
   }
   .newspage__navbar > h1 {
     font-size: 20px;
-    margin:0;
+    margin: 0;
   }
   .newspage__searchbox {
     display: flex;
