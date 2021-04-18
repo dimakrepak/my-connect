@@ -5,8 +5,8 @@ import NewsFeed from './NewsFeed'
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
-// const apiKey = '49553fc2f2ffc628c209dd0bd60d8925'
-const apiKey = 'ededefb48130670aca57b9c4d44a16d3'
+const apiKey = '49553fc2f2ffc628c209dd0bd60d8925'
+// const apiKey = 'ededefb48130670aca57b9c4d44a16d3'
 const topics = ['breaking-news', 'world', 'nation', 'business', 'technology', 'entertainment', 'sports', 'science', 'health']
 const countries = ['au', 'br', 'ca', 'ch', 'cn', 'de', 'eg', 'es', 'fr', 'gb', 'gr', 'hk', 'ie', 'il',
     'in', 'it', 'jp', 'nl', 'no', 'pe', 'ph', 'pk', 'pt', 'ro', 'ru', 'se', 'sg', 'tw', 'ua', 'us']

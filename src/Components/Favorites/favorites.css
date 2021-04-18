@@ -61,13 +61,17 @@
   height: 93%;
 }
 .favoriteCard {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
   height: 35%;
-  width: 40%;
+  width: 50%;
   margin: 4%;
   background-color: #dddddd;
   padding: 1%;
   border-radius: 5px;
-  font-size:15px
+  font-size:15px;
+  min-height:30%
 }
 .favoriteCard__link {
   text-decoration: none;
