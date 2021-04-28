@@ -64,14 +64,18 @@
   display: flex;
   flex-flow: column;
   justify-content: space-around;
-  height: 35%;
-  width: 50%;
-  margin: 4%;
+  /* height: %; */
+  width: 42%;
+  margin: 2%;
   background-color: #dddddd;
-  padding: 1%;
+  padding: 2%;
   border-radius: 5px;
   font-size:15px;
-  min-height:30%
+  /* min-height:30% */
+  transition: all 0.2s ease-in-out;
+}
+.favoriteCard:hover{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .favoriteCard__link {
   text-decoration: none;
