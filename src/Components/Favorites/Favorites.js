@@ -16,7 +16,7 @@ export default function Favorites({ user }) {
                 setFavorite(snapshot.docs.map(doc => doc.data()))
             })
     }, [])
-    console.log(favorites)
+    // console.log(favorites)
     return (
         <>
             {favoriteClick ?

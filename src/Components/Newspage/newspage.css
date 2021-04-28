@@ -3,11 +3,12 @@
   width: 100vw;
 }
 .newspage__navbar {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   height: 50px;
-  background-color: rgb(190, 204, 216);
+  background-color: rgb(183, 215, 243);
 }
 .newspage__searchbox {
   display: flex;
@@ -30,21 +31,25 @@
 }
 .newspage__search-btn {
   display: flex;
-  height: 28px;
-  width: 28px;
+  height: 30px;
+  width: 30px;
   justify-content: center;
   align-items: center;
   border: none;
   background-color: transparent;
   cursor: pointer;
   border-radius: 50%;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.4s ease-in-out;
   outline: none;
+  
 }
 .newspage__search-btn:hover {
   background-color: rgb(202, 230, 255);
 }
 .newscard {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
   background-color: #fff;
   width: 22.5vw;
   border-radius: 5px;
@@ -141,14 +146,12 @@
   }
 
   .newspage__topics {
-    border: none;
     background-color: rgba(0, 0, 0, 0);
     font-size: 20px;
     outline: none;
     transition: all 0.5s;
     cursor: pointer;
-    border-bottom: 3px dashed rgba(0, 0, 0, 0);
-    margin: 10px;
+    margin: 5px;
   }
   .newspage__navbar > h1 {
     font-size: 20px;

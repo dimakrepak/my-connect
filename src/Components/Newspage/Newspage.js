@@ -41,7 +41,7 @@ export default function Newspage() {
             })
             setLoad(false);
             setData(response.data.articles)
-            console.log(response.data.articles);
+            // console.log(response.data.articles);
         } catch (error) {
             console.log(error.response);
         }
@@ -58,7 +58,7 @@ export default function Newspage() {
             })
             setData(response.data.articles)
             setLoad(false);
-            console.log(response.data.articles);
+            // console.log(response.data.articles);
         } catch (error) {
             console.log(error.response);
         }
